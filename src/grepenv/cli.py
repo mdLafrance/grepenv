@@ -64,18 +64,20 @@ def print_environment(
     """Prints all environment items with styling according to the given options."""
     for x in env:
         # Format key
-        if values_only:
-            key_s = f"[dim]{x.key}[/]"
-        elif highlight:
-            key_s = highlight_string(x.key, pat)
+        if highlight:
+            if values_only:
+                key_s = f"[dim]{x.key}[/]"
+            else:
+                key_s = highlight_string(x.key, pat)
         else:
             key_s = x.key
 
         # Format value
-        if keys_only:
-            value_s = f"[dim]{x.value}[/]"
-        elif highlight:
-            value_s = highlight_string(x.value, pat)
+        if highlight:
+            if keys_only:
+                value_s = f"[dim]{x.value}[/]"
+            else:
+                value_s = highlight_string(x.value, pat)
         else:
             value_s = x.value
 
