@@ -24,8 +24,6 @@
 A simple tool to search through your environment.  
 Provides additional options for highlighting, searching specifically keys or values, and extracting values from best match keys.
 
-> You can achieve similar results with a one liner bash alias, but after having rewritten that alias on every machine I've used, I decided to turn it into a package.
-
 
 ## Installation
 `grepenv` can be installed using pip, but [pipx]([pipx](https://github.com/pypa/pipx)) is recommended:
@@ -54,3 +52,8 @@ OPENAI_API_KEY=123_abcdefghijklmno
 $ grepenv -fk git # find-key 'git'- finds all keys matching the pattern 'git' and gets their values.
 123_abcdefghijklmnop
 ```
+
+<br />
+
+> You can achieve similar results with a one liner bash alias, but after having rewritten that alias on every machine I've used, I decided to turn it into a package.
+
