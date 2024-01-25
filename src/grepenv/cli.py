@@ -53,6 +53,35 @@ def highlight_string(var: str, pat: re.Pattern) -> str:
     return var
 
 
+def format_environment_item(
+    env: EnvItem,
+    pat: re.Pattern,
+    keys_only: bool = False,
+    values_only: bool = False,
+    highlight: bool = True,
+):
+    # Format key
+    if highlight:
+        if values_only:
+            key_s = f"[dim]{env.key}[/]"
+        else:
+            key_s = highlight_string(env.key, pat)
+    else:
+        key_s = env.key
+
+    # Format value
+    if highlight:
+        if keys_only:
+            value_s = f"[dim]{env.value}[/]"
+        else:
+            value_s = highlight_string(env.value, pat)
+    else:
+        value_s = env.value
+
+    # concat
+    return f"{key_s}={value_s}"
+
+
 def print_environment(
     env: List[EnvItem],
     pat: re.Pattern,
@@ -62,26 +91,16 @@ def print_environment(
 ):
     """Prints all environment items with styling according to the given options."""
     for x in env:
-        # Format key
-        if highlight:
-            if values_only:
-                key_s = f"[dim]{x.key}[/]"
-            else:
-                key_s = highlight_string(x.key, pat)
-        else:
-            key_s = x.key
-
-        # Format value
-        if highlight:
-            if keys_only:
-                value_s = f"[dim]{x.value}[/]"
-            else:
-                value_s = highlight_string(x.value, pat)
-        else:
-            value_s = x.value
-
-        # concat
-        _CONSOLE.print(f"{key_s}={value_s}", highlight=False)
+        _CONSOLE.print(
+            format_environment_item(
+                x,
+                pat,
+                keys_only=keys_only,
+                values_only=values_only,
+                highlight=highlight,
+            ),
+            highlight=False,
+        )
 
 
 def print_matching_keys(env: List[EnvItem], pat: re.Pattern):

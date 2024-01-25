@@ -19,7 +19,7 @@ class EnvItem:
 def parse_environment() -> List[EnvItem]:
     """Extract all key/value pairs from the environment."""
     env_items = [EnvItem(k, v) for k, v in os.environ.items()]
-    return sorted(env_items, key=lambda e: e.key)
+    return sorted(env_items, key=lambda e: e.key.lower())
 
 
 def filter_env_by_regular_expression(
