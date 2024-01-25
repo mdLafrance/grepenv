@@ -9,7 +9,6 @@ import sys
 from typing import NoReturn, Union, List
 
 from rich.console import Console
-from rich.live import Live
 from rich.syntax import Syntax
 from rich.panel import Panel
 
