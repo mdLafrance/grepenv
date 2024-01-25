@@ -1,6 +1,11 @@
 import typer
 
-from grepenv.cli import find_keys, print_environment, try_compile_regex_pattern
+from grepenv.cli import (
+    print_environment,
+    print_matching_keys,
+    show_examples,
+    try_compile_regex_pattern,
+)
 
 from .grepenv import filter_env_by_regular_expression, parse_environment
 
@@ -13,13 +18,22 @@ greps the env
 \b
 By default, all keys and values are searched for matches.
 See options to specify only keys, or only values.
+
+\b
+Pattern matching is done using regex SEARCH. Use anchor characters if 
+matching the whole key or value is necessary.
+"""
+
+_EPILOG_STRING = """
+Call grepenv with the --example flag to see some example usage.
 """
 
 
-@app.command(help=_HELP_STRING, no_args_is_help=True)
+
+@app.command(help=_HELP_STRING, epilog=_EPILOG_STRING, no_args_is_help=True)
 def _(
     pattern: str = typer.Argument(
-        ..., help="Regular expression pattern to search with."
+        ".*", help="Regular expression pattern to search with."
     ),
     respect_case: bool = typer.Option(
         False,
@@ -40,14 +54,21 @@ def _(
     no_highlight: bool = typer.Option(
         False, "-nh", "--no-highlight", help="Disable match highlighting."
     ),
+    example: bool = typer.Option(
+        False, "--example", help="Print some example usage."
+    )
 ):
+    # Exit on example
+    if example:
+        return show_examples()
+
     pat = try_compile_regex_pattern(pattern, ignore_case=not respect_case)
 
     # Handle find key branch
     if find_key:
-        return find_keys(parse_environment(), pat)
+        return print_matching_keys(parse_environment(), pat)
 
-    # Filter environment variables
+    # Regular highlight and print functionality
     env = filter_env_by_regular_expression(
         pat, keys_only=keys_only, values_only=values_only
     )

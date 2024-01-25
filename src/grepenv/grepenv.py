@@ -1,9 +1,9 @@
+"""Module grepenv provides functionality for greping through the environment.
+"""
 import re
 import os
 
 from typing import List
-
-from pathlib import Path
 
 from dataclasses import dataclass
 
@@ -14,18 +14,6 @@ class EnvItem:
 
     key: str
     value: str
-
-
-def modify_pattern_to_ignore_case(pattern: str) -> str:
-    modified = ""
-
-    for c in pattern:
-        if str(c).isalpha():
-            modified += f"[{c}{c.upper()}]"
-        else:
-            modified += c
-
-    return modified
 
 
 def parse_environment() -> List[EnvItem]:
