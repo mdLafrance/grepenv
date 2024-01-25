@@ -29,6 +29,8 @@ def filter_env_by_regular_expression(
     expression.
     """
 
-    filter_fn = lambda e: (pat.search(e.key) and not values_only) or (pat.search(e.value) and not keys_only)
+    filter_fn = lambda e: (pat.search(e.key) and not values_only) or (
+        pat.search(e.value) and not keys_only
+    )
 
     return [e for e in parse_environment() if filter_fn(e)]

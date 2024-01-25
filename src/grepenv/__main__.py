@@ -29,7 +29,6 @@ Call grepenv with the --example flag to see some example usage.
 """
 
 
-
 @app.command(help=_HELP_STRING, epilog=_EPILOG_STRING, no_args_is_help=True)
 def _(
     pattern: str = typer.Argument(
@@ -54,9 +53,7 @@ def _(
     no_highlight: bool = typer.Option(
         False, "-nh", "--no-highlight", help="Disable match highlighting."
     ),
-    example: bool = typer.Option(
-        False, "--example", help="Print some example usage."
-    )
+    example: bool = typer.Option(False, "--example", help="Print some example usage."),
 ):
     # Exit on example
     if example:

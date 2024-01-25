@@ -105,28 +105,28 @@ def show_examples():
             XDG_RUNTIME_DIR=/run/user/1000
             XDG_SEAT=seat0
             ...
-            """
+            """,
         ),
         (
             "Find all environment keys and variables containing the letters 'xdg' (strict lowercase)",
             """
             $ grepenv xdg -c
             XDG_CONFIG_DIRS=/etc/xdg/xdg-cinnamon:/etc/xdg
-            """
+            """,
         ),
         (
             "Find all keys containing the letters 'git'",
             """
             $ grepenv git -k
             GITHUB_API_TOKEN=abc_NlNhalNDL78NAhdKhNAk78bdf7f
-            """
+            """,
         ),
         (
             "Extract all values from keys which contain the letters 'git'",
             """
             $ grepenv git -fk
             abc_NlNhalNDL78NAhdKhNAk78bdf7f
-            """
+            """,
         ),
         (
             "Get all environment that looks like an api key",
@@ -134,17 +134,9 @@ def show_examples():
             $ grepenv "_api_(key|token)_" -k
             GITHUB_API_TOKEN=abc_NlNhalNDL78NAhdKhNAk78bdf7f
             OPENAI_API_KEY=123_abcdefghijklmnop
-            """
-        )
+            """,
+        ),
     ]
 
     for title, body in examples:
-        _CONSOLE.print(
-            Panel(
-                Syntax(body, "bash"),
-                title=title,
-                title_align="left"
-            )
-        )
-
-
+        _CONSOLE.print(Panel(Syntax(body, "bash"), title=title, title_align="left"))
