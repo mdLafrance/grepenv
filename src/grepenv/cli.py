@@ -75,6 +75,12 @@ def print_environment(
         _CONSOLE.print(f"{key_s}={value_s}", highlight=False)
 
 
+def find_keys(env: List[EnvItem], pat: re.Pattern):
+    for x in env:
+        if pat.search(x.key):
+            print(x.value)
+
+
 def print_error(m: str):
     """Print a formatted error message `m`."""
     _CONSOLE.print(f"[bold error]ERROR: [/]{m}")

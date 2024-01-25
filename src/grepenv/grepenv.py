@@ -30,7 +30,8 @@ def modify_pattern_to_ignore_case(pattern: str) -> str:
 
 def parse_environment() -> List[EnvItem]:
     """Extract all key/value pairs from the environment."""
-    return [EnvItem(k, v) for k, v in os.environ.items()]
+    env_items = [EnvItem(k, v) for k, v in os.environ.items()]
+    return sorted(env_items, key=lambda e: e.key)
 
 
 def filter_env_by_regular_expression(
