@@ -19,6 +19,7 @@ coverage = "^7.4.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.12.1"
+invoke = "^2.2.0"
 
 [tool.poetry.scripts]
 grepenv = "grepenv.__main__:main"
