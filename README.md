@@ -53,7 +53,21 @@ $ grepenv -fk git # find-key 'git'- finds all keys matching the pattern 'git' an
 123_abcdefghijklmnop
 ```
 
-<br />
+## Development
+This repo uses [poetry](https://python-poetry.org/) as a build system, and [invoke](https://www.pyinvoke.org/) for task running.
 
-> You can achieve similar results with a one liner bash alias, but after having rewritten that alias on every machine I've used, I decided to turn it into a package.
+`inv` can then be used to run as follows:
+```bash
+$ inv lint
+$ inv test
+$ inv build
+$ inv --list # Shows available commands
+```
+
+
+***
+
+> You can achieve similar results with a one liner bash alias, but after having rewritten that alias on every machine I've used, I decided to turn it into a package for maintainability.
+
+> Another language might have been more fun to use, but since pip is by FAR the most available package manager (compared to say cargo), here we are.
 
