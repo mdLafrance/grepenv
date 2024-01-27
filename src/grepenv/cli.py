@@ -79,7 +79,7 @@ def format_environment_item(
         value_s = env.value
 
     # concat
-    return f"{key_s}={value_s}"
+    return rf"{key_s}={value_s}"
 
 
 def print_environment(
