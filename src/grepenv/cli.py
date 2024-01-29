@@ -5,6 +5,7 @@ cli itself.
 """
 import re
 import sys
+import platform
 
 from typing import NoReturn, Union, List
 
@@ -48,7 +49,7 @@ def highlight_string(var: str, pat: re.Pattern) -> str:
         s1 = var[start:end]
         s2 = var[end:]
 
-        var = f"{s0}[red]{s1}[/]{s2}"
+        var = rf"{s0}[red]{s1}[/]{s2}"
 
     return var
 
@@ -79,7 +80,12 @@ def format_environment_item(
         value_s = env.value
 
     # concat
-    return rf"{key_s}={value_s}"
+    v = f"{key_s}={value_s}"
+
+    if platform.system() == "Windows":
+        v = v.replace("\\[", "\\\\[")
+
+    return v
 
 
 def print_environment(
