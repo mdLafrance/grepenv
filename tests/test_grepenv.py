@@ -37,7 +37,9 @@ def test_filter_env_by_regular_expression():
         EnvItem("VAL1", "VAL2"),
     ]
 
-    assert filter_env_by_regular_expression(re.compile("v", re.I), values_only=True) == [
+    assert filter_env_by_regular_expression(
+        re.compile("v", re.I), values_only=True
+    ) == [
         EnvItem("PATH", "/a/b/c:/d/e/f/v"),
         EnvItem("VAL1", "VAL2"),
     ]
@@ -45,3 +47,26 @@ def test_filter_env_by_regular_expression():
     assert filter_env_by_regular_expression(re.compile("v")) == [
         EnvItem("PATH", "/a/b/c:/d/e/f/v"),
     ]
+
+
+def test_highlight_string():
+    from grepenv.grepenv import highlight_string
+
+    expected = (
+        (
+            "go",
+            "/usr/bin/go:/usr/env/asdf:/foo/golang/bar",
+            "/usr/bin/[red3]go[/]:/usr/env/asdf:/foo/[red3]go[/]lang/bar",
+        ),
+        (
+            "10",
+            "SOME_VAR=ANOTHER_VAR",
+            "SOME_VAR=ANOTHER_VAR",
+        ),
+        ("a", "a", "[red3]a[/]"),
+    )
+
+    for pat, before, expected in expected:
+        res = highlight_string(before, re.compile(pat))
+
+        assert res == expected
