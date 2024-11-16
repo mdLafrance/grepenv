@@ -1,14 +1,12 @@
 [tool.poetry]
 name = "grepenv"
-version = "1.0.5"
+version = "1.1.0"
 description = "grep's the env"
 authors = ["mdLafrance <maxlafrance97@gmail.com>"]
 readme = "README.md"
 homepage = "https://github.com/mdLafrance/grepenv"
 repository = "https://github.com/mdLafrance/grepenv"
-packages = [
-    { include = "grepenv", from = "src" }
-]
+packages = [{ include = "grepenv", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -22,6 +20,7 @@ pytest = "^7.4.4"
 coverage = "^7.4.0"
 
 [tool.poetry.scripts]
+ge = "grepenv.__main__:main"
 grepenv = "grepenv.__main__:main"
 
 [build-system]
