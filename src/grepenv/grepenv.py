@@ -34,3 +34,23 @@ def filter_env_by_regular_expression(
     )
 
     return [e for e in parse_environment() if filter_fn(e)]
+
+
+def highlight_string(var: str, pat: re.Pattern) -> str:
+    """Scan the given string variable, and return a modified version in which
+    all ranges matched by `pat` surrounded in `rich` highlighting tags.
+    """
+    if not pat.search(var):
+        return var
+
+    for m in reversed(list(pat.finditer(var))):
+        start = m.start()
+        end = m.end()
+
+        s0 = var[:start]
+        s1 = var[start:end]
+        s2 = var[end:]
+
+        var = rf"{s0}[red]{s1}[/]{s2}"
+
+    return var

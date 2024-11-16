@@ -3,6 +3,7 @@
 These functions may call sys.exit(), and so should only be called form the
 cli itself.
 """
+import os
 import re
 import sys
 import platform
@@ -16,7 +17,7 @@ from rich.panel import Panel
 from grepenv.grepenv import EnvItem
 
 
-_CONSOLE = Console()
+_CONSOLE = Console(highlight=False)
 
 
 def try_compile_regex_pattern(
@@ -49,7 +50,7 @@ def highlight_string(var: str, pat: re.Pattern) -> str:
         s1 = var[start:end]
         s2 = var[end:]
 
-        var = rf"{s0}[red]{s1}[/]{s2}"
+        var = rf"{s0}[red3]{s1}[/]{s2}"
 
     return var
 
@@ -113,6 +114,21 @@ def print_matching_keys(env: List[EnvItem], pat: re.Pattern):
     for x in env:
         if pat.search(x.key):
             print(x.value)
+
+
+def print_path(pat: re.Pattern, highlight: bool = True):
+    path_env = os.environ.get("PATH")
+
+    if not path_env:
+        print_error(f"PATH not found in environment")
+        sys.exit(1)
+
+    for path_item in path_env.split(":"):
+        if pat.search(path_item):
+            if highlight:
+                _CONSOLE.print(highlight_string(path_item, pat))
+            else:
+                print(path_item)
 
 
 def print_error(m: str):
