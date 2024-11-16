@@ -1,13 +1,13 @@
 
 <h1 align=center>
   
-  **grepenv**
+  **grepenv** 🔎
   
 </h1>
 
 <h3 align=center>
 
-  greps your env 🔎
+  greps your env
 
 </h3>
 
