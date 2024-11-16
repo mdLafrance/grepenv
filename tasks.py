@@ -2,6 +2,7 @@
 """
 from invoke import task
 
+
 @task
 def lint(c):
     c.run("poetry run black ./src")
@@ -10,12 +11,13 @@ def lint(c):
 @task
 def test(c):
     c.run("poetry run coverage run -m pytest tests/")
-    c.run("poetry run coverage report --omit=\"tests/*\" --fail-under=75 --show-missing")
+    c.run('poetry run coverage report --omit="tests/*" --fail-under=80')
 
 
 @task
 def build(c):
     c.run("poetry build")
+
 
 @task
 def publish(c):
