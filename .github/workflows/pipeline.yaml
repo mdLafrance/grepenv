@@ -53,6 +53,9 @@ jobs:
             - name: Run tests
               run: |
                 poetry run inv test
+                poetry run coverage xml -o coverage.xml  # Convert to Cobertura XML format
 
             - name: Coveralls
               uses: coverallsapp/github-action@v2
+              with:
+                path-to-lcov: coverage.xml
