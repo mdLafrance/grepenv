@@ -21,9 +21,9 @@
 </div>
 
 ## About
-A simple tool to search through your environment.  
-Provides additional options for highlighting, searching specifically keys or values, and extracting values from best match keys.
+A little tool to search through your environment.  
 
+I made `grepenv` to simplify the process of calling various combinations of `env | grep | sort`, and replicating my aliases for this across machines.
 
 ## Installation
 `grepenv` can be installed using pip, but [pipx]([pipx](https://github.com/pypa/pipx)) is recommended:
@@ -32,10 +32,11 @@ pipx install grepenv
 ```
 This installs the `grepenv` shell script:
 ```bash
-grepenv --help
+grepenv --help 
+ge --help # The short alias 'ge' is also available
 ```
 ## Usage
-`grepenv` takes a regex pattern, and matches it against currently available environment variables.  
+`grepenv` takes a regex pattern, and matches it against currently available environment variables. 
 Calling `grepenv --example` will show some example usage.
 
 ```bash
@@ -43,31 +44,20 @@ $ grepenv xdg # Will find any key or value that contains the letters xdg (lower 
 ```
 
 ``` bash
-$ grepenv "_api_(key|token)_" -k # finds any environment that looks like an api key. Searches only keys.
+$ grepenv "_api_(key|token)_" --keys # finds any environment variable with this regex pattern, matching only on keys.
 GITHUB_API_TOKEN=abc_NlNhalNDL78NAhdKhNAk78bdf7f
 OPENAI_API_KEY=123_abcdefghijklmno
 ```
 
 ```bash
-$ grepenv -fk git # find-key 'git'- finds all keys matching the pattern 'git' and gets their values.
+$ grepenv --find-key gitlab # Search for an environment variable with the name gitlab, and output it's value.
 123_abcdefghijklmnop
+# GITLAB_API_TOKEN=123_abcdefghijklmnop
 ```
 
-## Development
-This repo uses [poetry](https://python-poetry.org/) as a build system, and [invoke](https://www.pyinvoke.org/) for task running.
-
-`inv` can then be used to run as follows:
 ```bash
-$ inv lint
-$ inv test
-$ inv build
-$ inv --list # Shows available commands
+$ grepenv perl --path # Search for the pattern "perl", but only in the PATH
+/usr/bin/site_perl
+/usr/bin/vendor_perl
+/usr/bin/core_perl
 ```
-
-
-***
-
-> You can achieve similar results with a one liner bash alias, but after having rewritten that alias on every machine I've used, I decided to turn it into a package for maintainability.
-
-> Another language might have been more fun to use, but since pip is by FAR the most available package manager (compared to say cargo), here we are.
-
