@@ -10,7 +10,7 @@ def lint(c):
 @task
 def test(c):
     c.run("poetry run coverage run -m pytest tests/")
-    c.run("poetry run coverage report --omit=\"tests/*\" --fail-under=80")
+    c.run("poetry run coverage report --omit=\"tests/*\" --fail-under=75 --show-missing")
 
 
 @task

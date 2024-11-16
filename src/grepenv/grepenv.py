@@ -51,6 +51,6 @@ def highlight_string(var: str, pat: re.Pattern) -> str:
         s1 = var[start:end]
         s2 = var[end:]
 
-        var = rf"{s0}[red]{s1}[/]{s2}"
+        var = rf"{s0}[red3]{s1}[/]{s2}"
 
     return var
