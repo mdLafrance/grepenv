@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "grepenv"
-version = "1.1.0"
+version = "1.1.1"
 description = "grep's the env"
 authors = ["mdLafrance <maxlafrance97@gmail.com>"]
 readme = "README.md"
