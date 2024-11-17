@@ -5,8 +5,6 @@ import os
 import sys
 import typer
 
-import pyperclip
-
 from grepenv.cli import (
     print_path,
     highlight_string,
